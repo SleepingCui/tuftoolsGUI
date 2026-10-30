@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Page x:Class="TuftoolsGui.Pages.ConsolePage" xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+  <ScrollViewer VerticalScrollBarVisibility="Auto">
+    <StackPanel Padding="24" Spacing="16">
+      <TextBlock Text="JSON 控制台" Style="{StaticResource PageTitleStyle}" />
+      <TextBlock Text="直接向 tuftools 发送 JSON 请求，用于调试参数或验证 op 行为。请求会从标准输入写入，响应原样展示。" Style="{StaticResource HintStyle}" />
+      <InfoBar x:Name="StatusBar" IsOpen="False" IsClosable="True" />
+      <Border Style="{StaticResource CardStyle}">
+        <StackPanel Spacing="10">
+          <TextBlock Text="请求" Style="{StaticResource SectionTitleStyle}" />
+          <TextBox x:Name="RequestBox" AcceptsReturn="True" TextWrapping="NoWrap" Height="150" FontFamily="Consolas" FontSize="12" ScrollViewer.HorizontalScrollBarVisibility="Auto" ScrollViewer.VerticalScrollBarVisibility="Auto" />
+          <StackPanel Orientation="Horizontal" Spacing="8">
+            <Button Content="发送" Style="{StaticResource AccentButtonStyle}" Click="Send_Click" />
+            <Button Content="模板" Click="Template_Click" />
+            <Button Content="清空缓存" Click="ClearCache_Click" />
+            <Button Content="复制响应" Click="Copy_Click" />
+            <CheckBox x:Name="PrettyCheck" Content="格式化响应" MinWidth="0" />
+            <ProgressRing x:Name="BusyRing" Width="20" Height="20" IsActive="False" />
+            <TextBlock x:Name="ElapsedText" Text="" Style="{StaticResource HintStyle}" VerticalAlignment="Center" />
+          </StackPanel>
+        </StackPanel>
+      </Border>
+      <Border Style="{StaticResource CardStyle}">
+        <StackPanel Spacing="10">
+          <TextBlock Text="响应" Style="{StaticResource SectionTitleStyle}" />
+          <TextBox x:Name="ResponseBox" IsReadOnly="True" AcceptsReturn="True" TextWrapping="NoWrap" Height="360" FontFamily="Consolas" FontSize="12" ScrollViewer.HorizontalScrollBarVisibility="Auto" ScrollViewer.VerticalScrollBarVisibility="Auto" />
+        </StackPanel>
+      </Border>
+    </StackPanel>
+  </ScrollViewer>
+</Page>

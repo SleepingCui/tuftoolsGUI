@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Page x:Class="TuftoolsGui.Pages.PpPage" xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:models="using:TuftoolsGui.Models">
+  <Page.Resources>
+    <Style x:Key="CompactItemStyle" TargetType="ListViewItem">
+      <Setter Property="Padding" Value="8,4" />
+      <Setter Property="MinHeight" Value="0" />
+      <Setter Property="HorizontalContentAlignment" Value="Stretch" />
+    </Style>
+  </Page.Resources>
+  <ScrollViewer VerticalScrollBarVisibility="Auto">
+    <StackPanel Padding="24" Spacing="16">
+      <TextBlock Text="PP 计算" Style="{StaticResource PageTitleStyle}" />
+      <TextBlock Text="按谱面 ID 计算时自动读取物量与基础分；也可以手填基础分与物量。" Style="{StaticResource HintStyle}" />
+      <InfoBar x:Name="StatusBar" IsOpen="False" IsClosable="True" />
+      <Border Style="{StaticResource CardStyle}">
+        <StackPanel Spacing="12">
+          <TextBlock Text="输入" Style="{StaticResource SectionTitleStyle}" />
+          <Grid ColumnSpacing="12" RowSpacing="8">
+            <Grid.ColumnDefinitions>
+              <ColumnDefinition Width="90" />
+              <ColumnDefinition Width="*" />
+              <ColumnDefinition Width="90" />
+              <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+              <RowDefinition Height="Auto" />
+              <RowDefinition Height="Auto" />
+              <RowDefinition Height="Auto" />
+              <RowDefinition Height="Auto" />
+              <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
+            <TextBlock Grid.Column="0" Grid.Row="0" Text="谱面 ID" Style="{StaticResource FieldLabelStyle}" />
+            <TextBox Grid.Column="1" Grid.Row="0" x:Name="LevelIdBox" PlaceholderText="填写后忽略手动基础分与物量" />
+            <TextBlock Grid.Column="2" Grid.Row="0" Text="准确率" Style="{StaticResource FieldLabelStyle}" />
+            <TextBox Grid.Column="3" Grid.Row="0" x:Name="XaccBox" Text="100" PlaceholderText="例如 99.28 表示 99.28%" />
+            <TextBlock Grid.Column="0" Grid.Row="1" Text="基础分" Style="{StaticResource FieldLabelStyle}" />
+            <TextBox Grid.Column="1" Grid.Row="1" x:Name="BaseScoreBox" PlaceholderText="例如 2500" />
+            <TextBlock Grid.Column="2" Grid.Row="1" Text="物量" Style="{StaticResource FieldLabelStyle}" />
+            <TextBox Grid.Column="3" Grid.Row="1" x:Name="TilecountBox" PlaceholderText="例如 800" />
+            <TextBlock Grid.Column="0" Grid.Row="2" Text="难度" Style="{StaticResource FieldLabelStyle}" />
+            <TextBox Grid.Column="1" Grid.Row="2" x:Name="DifficultyBox" PlaceholderText="例如 P15、U16，可选" />
+            <TextBlock Grid.Column="2" Grid.Row="2" Text="漏击" Style="{StaticResource FieldLabelStyle}" />
+            <TextBox Grid.Column="3" Grid.Row="2" x:Name="MissesBox" Text="0" />
+            <TextBlock Grid.Column="0" Grid.Row="3" Text="速度" Style="{StaticResource FieldLabelStyle}" />
+            <TextBox Grid.Column="1" Grid.Row="3" x:Name="SpeedBox" Text="1.0" />
+            <StackPanel Grid.Column="2" Grid.ColumnSpan="2" Grid.Row="3" Orientation="Horizontal" Spacing="16" VerticalAlignment="Bottom">
+              <CheckBox x:Name="NoHoldTapSwitch" Content="无长条（noHoldTap）" />
+              <CheckBox x:Name="MarathonSwitch" Content="马拉松（marathon）" />
+            </StackPanel>
+            <StackPanel Grid.Column="0" Grid.ColumnSpan="4" Grid.Row="4" Orientation="Horizontal" Spacing="8" Margin="0,6,0,0">
+              <Button Content="计算" Style="{StaticResource AccentButtonStyle}" Click="Calc_Click" />
+              <ProgressRing x:Name="BusyRing" Width="20" Height="20" IsActive="False" />
+            </StackPanel>
+          </Grid>
+        </StackPanel>
+      </Border>
+      <Border Style="{StaticResource CardStyle}">
+        <StackPanel Spacing="12">
+          <TextBlock Text="排位分变化（可选）" Style="{StaticResource SectionTitleStyle}" />
+          <StackPanel Orientation="Horizontal" Spacing="12">
+            <CheckBox x:Name="RankChangeSwitch" Content="附带排位分预览" MinWidth="0" />
+            <TextBox x:Name="PlayerKeyBox" Width="220" PlaceholderText="玩家 ID 或名称" />
+            <ComboBox x:Name="PlayerBy" SelectedIndex="0" MinWidth="110" VerticalAlignment="Center">
+              <ComboBoxItem Content="按 ID" />
+              <ComboBoxItem Content="按名称" />
+              <ComboBoxItem Content="按 Discord" />
+            </ComboBox>
+          </StackPanel>
+          <TextBlock Text="开启后需要填写玩家定位信息，tuftools 会重算排位分并对比名次。" Style="{StaticResource HintStyle}" />
+        </StackPanel>
+      </Border>
+      <Border Style="{StaticResource CardStyle}">
+        <StackPanel Spacing="10">
+          <TextBlock Text="结果" Style="{StaticResource SectionTitleStyle}" />
+          <TextBlock x:Name="SummaryText" Text="尚未计算。" TextWrapping="Wrap" IsTextSelectionEnabled="True" LineHeight="22" />
+          <ScrollViewer Height="260" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Disabled">
+            <ItemsControl x:Name="ResultRows">
+              <ItemsControl.ItemTemplate>
+                <DataTemplate x:DataType="models:KeyValueRow">
+                  <Grid ColumnSpacing="8" Padding="0,2">
+                    <Grid.ColumnDefinitions>
+                      <ColumnDefinition Width="260" />
+                      <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
+                    <TextBlock Grid.Column="0" Text="{x:Bind Key}" Style="{StaticResource CellStyle}" Foreground="{ThemeResource TextFillColorSecondaryBrush}" />
+                    <TextBlock Grid.Column="1" Text="{x:Bind Value}" FontFamily="Consolas" FontSize="12" TextWrapping="Wrap" IsTextSelectionEnabled="True" />
+                  </Grid>
+                </DataTemplate>
+              </ItemsControl.ItemTemplate>
+            </ItemsControl>
+          </ScrollViewer>
+        </StackPanel>
+      </Border>
+    </StackPanel>
+  </ScrollViewer>
+</Page>

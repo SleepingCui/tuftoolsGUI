@@ -1,0 +1,267 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Page x:Class="TuftoolsGui.Pages.XaccPage" xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:models="using:TuftoolsGui.Models">
+  <Page.Resources>
+    <Style x:Key="CompactItemStyle" TargetType="ListViewItem">
+      <Setter Property="Padding" Value="8,4" />
+      <Setter Property="MinHeight" Value="0" />
+      <Setter Property="HorizontalContentAlignment" Value="Stretch" />
+    </Style>
+  </Page.Resources>
+  <Grid>
+    <Grid.RowDefinitions>
+      <RowDefinition Height="Auto" />
+      <RowDefinition Height="*" />
+    </Grid.RowDefinitions>
+    <StackPanel Grid.Row="0" Padding="24,20,24,8" Spacing="12">
+      <TextBlock Text="XACC 工具" Style="{StaticResource PageTitleStyle}" />
+      <InfoBar x:ConnectionId='71' x:Name="StatusBar" IsOpen="False" IsClosable="True" />
+    </StackPanel>
+    <Pivot Grid.Row="1" Margin="12,0,12,0">
+      <PivotItem Header="正算">
+        <ScrollViewer VerticalScrollBarVisibility="Auto">
+          <StackPanel Padding="12,16,12,24" Spacing="16">
+            <Border Style="{StaticResource CardStyle}">
+              <StackPanel Spacing="12">
+                <TextBlock Text="判定数量换算 XACC" Style="{StaticResource SectionTitleStyle}" />
+                <ToggleSwitch x:ConnectionId='57' x:Name="XPerfectSwitch" Header="XPerfect 模式（9 键）" OnContent="开启" OffContent="关闭"                            />
+                <Grid ColumnSpacing="12" RowSpacing="8">
+                  <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                  </Grid.ColumnDefinitions>
+                  <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                  </Grid.RowDefinitions>
+                  <NumberBox x:ConnectionId='64' Grid.Column="0" Grid.Row="0" x:Name="CPerfect" Header="perfect" Value="1000" />
+                  <NumberBox x:ConnectionId='65' Grid.Column="1" Grid.Row="0" x:Name="CLPerfect" Header="lPerfect" Value="0" />
+                  <NumberBox x:ConnectionId='66' Grid.Column="2" Grid.Row="0" x:Name="CEarly" Header="early" Value="0" />
+                  <NumberBox x:ConnectionId='67' Grid.Column="3" Grid.Row="0" x:Name="CLate" Header="late" Value="0" />
+                  <NumberBox x:ConnectionId='68' Grid.Column="0" Grid.Row="1" x:Name="CTooEarly" Header="tooEarly" Value="0" />
+                  <NumberBox x:ConnectionId='69' Grid.Column="1" Grid.Row="1" x:Name="CEPerfect" Header="ePerfect" Value="0" />
+                  <NumberBox x:ConnectionId='70' Grid.Column="2" Grid.Row="1" x:Name="CFailMiss" Header="failMiss" Value="0" />
+                </Grid>
+                <Grid x:ConnectionId='58' x:Name="XpPanel" ColumnSpacing="12" Visibility="Collapsed">
+                  <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                  </Grid.ColumnDefinitions>
+                  <NumberBox x:ConnectionId='61' Grid.Column="0" x:Name="CXPerfect" Header="xperfect" Value="0" />
+                  <NumberBox x:ConnectionId='62' Grid.Column="1" x:Name="CPerfectPlus" Header="+perfect" Value="0" />
+                  <NumberBox x:ConnectionId='63' Grid.Column="2" x:Name="CPerfectMinus" Header="-perfect" Value="0" />
+                </Grid>
+                <StackPanel Orientation="Horizontal" Spacing="8">
+                  <Button x:ConnectionId='59' Content="计算" Style="{StaticResource AccentButtonStyle}"                    />
+                  <ProgressRing x:ConnectionId='60' x:Name="CalcRing" Width="20" Height="20" IsActive="False" />
+                </StackPanel>
+              </StackPanel>
+            </Border>
+            <Border Style="{StaticResource CardStyle}">
+              <StackPanel Spacing="10">
+                <TextBlock Text="结果" Style="{StaticResource SectionTitleStyle}" />
+                <TextBlock x:ConnectionId='51' x:Name="CalcSummary" Text="尚未计算。" TextWrapping="Wrap" IsTextSelectionEnabled="True" LineHeight="22" />
+                <ScrollViewer Height="240" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Disabled">
+                  <ItemsControl x:ConnectionId='52' x:Name="CalcRows">
+                    <ItemsControl.ItemTemplate>
+                      <DataTemplate                                >
+                        <Grid x:ConnectionId='54' ColumnSpacing="8" Padding="0,2">
+                          <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="260" />
+                            <ColumnDefinition Width="*" />
+                          </Grid.ColumnDefinitions>
+                          <TextBlock x:ConnectionId='55' Grid.Column="0"                     Style="{StaticResource CellStyle}" Foreground="{ThemeResource TextFillColorSecondaryBrush}" />
+                          <TextBlock x:ConnectionId='56' Grid.Column="1"                       FontFamily="Consolas" FontSize="12" TextWrapping="Wrap" IsTextSelectionEnabled="True" />
+                        </Grid>
+                      </DataTemplate>
+                    </ItemsControl.ItemTemplate>
+                  </ItemsControl>
+                </ScrollViewer>
+              </StackPanel>
+            </Border>
+          </StackPanel>
+        </ScrollViewer>
+      </PivotItem>
+      <PivotItem Header="反推">
+        <ScrollViewer VerticalScrollBarVisibility="Auto">
+          <StackPanel Padding="12,16,12,24" Spacing="16">
+            <Border Style="{StaticResource CardStyle}">
+              <StackPanel Spacing="12">
+                <TextBlock Text="目标准确率反推判定数量" Style="{StaticResource SectionTitleStyle}" />
+                <TextBlock Text="目标准确率的小数位数决定反推精度，例如 99.28 表示保留两位小数。可选的锁定项只固定写出的判定，其余自由分配。" Style="{StaticResource HintStyle}" />
+                <Grid ColumnSpacing="12" RowSpacing="8">
+                  <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                  </Grid.ColumnDefinitions>
+                  <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                  </Grid.RowDefinitions>
+                  <NumberBox x:ConnectionId='39' Grid.Column="0" Grid.Row="0" x:Name="RevTotal" Header="物量 total" Value="1000" />
+                  <TextBox x:ConnectionId='40' Grid.Column="1" Grid.Row="0" x:Name="RevXacc" Header="目标准确率" Text="99.28" PlaceholderText="例如 99.28" />
+                  <ToggleSwitch x:ConnectionId='41' Grid.Column="2" Grid.Row="0" x:Name="RevXPerfect" Header="XPerfect" OnContent="开启" OffContent="关闭" />
+                  <ComboBox x:ConnectionId='42' Grid.Column="3" Grid.Row="0" x:Name="RevSolver" Header="求解器" SelectedIndex="0" HorizontalAlignment="Stretch">
+                    <ComboBoxItem Content="自动" />
+                    <ComboBoxItem Content="精确 DP" />
+                    <ComboBoxItem Content="分支定界" />
+                    <ComboBoxItem Content="旧版 map DP" />
+                  </ComboBox>
+                  <TextBox x:ConnectionId='43' Grid.Column="0" Grid.Row="1" x:Name="LockPerfect" Header="锁定 perfect" PlaceholderText="留空表示不锁定" />
+                  <TextBox x:ConnectionId='44' Grid.Column="1" Grid.Row="1" x:Name="LockLPerfect" Header="锁定 lPerfect" PlaceholderText="空" />
+                  <TextBox x:ConnectionId='45' Grid.Column="2" Grid.Row="1" x:Name="LockFailMiss" Header="锁定 failMiss" PlaceholderText="空" />
+                  <TextBox x:ConnectionId='46' Grid.Column="3" Grid.Row="1" x:Name="LockEarly" Header="锁定 early" PlaceholderText="空" />
+                  <StackPanel Grid.Column="0" Grid.ColumnSpan="4" Grid.Row="2" Orientation="Horizontal" Spacing="8" Margin="0,6,0,0">
+                    <Button x:ConnectionId='47' Content="反推" Style="{StaticResource AccentButtonStyle}"                       />
+                    <Button x:ConnectionId='48' Content="提交换算组合"                          />
+                    <TextBox x:ConnectionId='49' x:Name="RevMaxSolutions" Width="120" PlaceholderText="组合上限 64" />
+                    <ProgressRing x:ConnectionId='50' x:Name="RevRing" Width="20" Height="20" IsActive="False" />
+                  </StackPanel>
+                </Grid>
+              </StackPanel>
+            </Border>
+            <Border Style="{StaticResource CardStyle}">
+              <StackPanel Spacing="10">
+                <TextBlock Text="结果" Style="{StaticResource SectionTitleStyle}" />
+                <TextBlock x:ConnectionId='22' x:Name="RevSummary" Text="尚未反推。" TextWrapping="Wrap" IsTextSelectionEnabled="True" LineHeight="22" />
+
+                <ScrollViewer Height="220" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Disabled">
+                  <ItemsControl x:ConnectionId='34' x:Name="RevRows">
+                    <ItemsControl.ItemTemplate>
+                      <DataTemplate                                >
+                        <Grid x:ConnectionId='36' ColumnSpacing="8" Padding="0,2">
+                          <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="260" />
+                            <ColumnDefinition Width="*" />
+                          </Grid.ColumnDefinitions>
+                          <TextBlock x:ConnectionId='37' Grid.Column="0"                     Style="{StaticResource CellStyle}" Foreground="{ThemeResource TextFillColorSecondaryBrush}" />
+                          <TextBlock x:ConnectionId='38' Grid.Column="1"                       FontFamily="Consolas" FontSize="12" TextWrapping="Wrap" IsTextSelectionEnabled="True" />
+                        </Grid>
+                      </DataTemplate>
+                    </ItemsControl.ItemTemplate>
+                  </ItemsControl>
+                </ScrollViewer>
+                <TextBlock Text="等效组合（xacc.equivalents 返回的全部解）" Style="{StaticResource HintStyle}" />
+                <Grid ColumnSpacing="8" Padding="8,0">
+                  <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="40" />
+                    <ColumnDefinition Width="70" />
+                    <ColumnDefinition Width="70" />
+                    <ColumnDefinition Width="70" />
+                    <ColumnDefinition Width="80" />
+                    <ColumnDefinition Width="90" />
+                    <ColumnDefinition Width="80" />
+                    <ColumnDefinition Width="70" />
+                  </Grid.ColumnDefinitions>
+                  <TextBlock Grid.Column="0" Text="#" Style="{StaticResource TableHeaderStyle}" />
+                  <TextBlock Grid.Column="1" Text="failMiss" Style="{StaticResource TableHeaderStyle}" />
+                  <TextBlock Grid.Column="2" Text="tooEarly" Style="{StaticResource TableHeaderStyle}" />
+                  <TextBlock Grid.Column="3" Text="early" Style="{StaticResource TableHeaderStyle}" />
+                  <TextBlock Grid.Column="4" Text="ePerfect" Style="{StaticResource TableHeaderStyle}" />
+                  <TextBlock Grid.Column="5" Text="perfect" Style="{StaticResource TableHeaderStyle}" />
+                  <TextBlock Grid.Column="6" Text="lPerfect" Style="{StaticResource TableHeaderStyle}" />
+                  <TextBlock Grid.Column="7" Text="late" Style="{StaticResource TableHeaderStyle}" />
+                </Grid>
+                <ListView x:ConnectionId='23' x:Name="SolutionRows" Height="200" ItemContainerStyle="{StaticResource CompactItemStyle}" SelectionMode="None">
+                  <ListView.ItemTemplate>
+                    <DataTemplate                                >
+                      <Grid x:ConnectionId='25' ColumnSpacing="8">
+                        <Grid.ColumnDefinitions>
+                          <ColumnDefinition Width="40" />
+                          <ColumnDefinition Width="70" />
+                          <ColumnDefinition Width="70" />
+                          <ColumnDefinition Width="70" />
+                          <ColumnDefinition Width="80" />
+                          <ColumnDefinition Width="90" />
+                          <ColumnDefinition Width="80" />
+                          <ColumnDefinition Width="70" />
+                        </Grid.ColumnDefinitions>
+                        <TextBlock x:ConnectionId='26' Grid.Column="0"                       Style="{StaticResource CellStyle}" />
+                        <TextBlock x:ConnectionId='27' Grid.Column="1"                          Style="{StaticResource CellStyle}" />
+                        <TextBlock x:ConnectionId='28' Grid.Column="2"                          Style="{StaticResource CellStyle}" />
+                        <TextBlock x:ConnectionId='29' Grid.Column="3"                       Style="{StaticResource CellStyle}" />
+                        <TextBlock x:ConnectionId='30' Grid.Column="4"                          Style="{StaticResource CellStyle}" />
+                        <TextBlock x:ConnectionId='31' Grid.Column="5"                         Style="{StaticResource CellStyle}" />
+                        <TextBlock x:ConnectionId='32' Grid.Column="6"                          Style="{StaticResource CellStyle}" />
+                        <TextBlock x:ConnectionId='33' Grid.Column="7"                      Style="{StaticResource CellStyle}" />
+                      </Grid>
+                    </DataTemplate>
+                  </ListView.ItemTemplate>
+                </ListView>
+              </StackPanel>
+            </Border>
+          </StackPanel>
+        </ScrollViewer>
+      </PivotItem>
+      <PivotItem Header="模型与配置">
+        <ScrollViewer VerticalScrollBarVisibility="Auto">
+          <StackPanel Padding="12,16,12,24" Spacing="16">
+            <Border Style="{StaticResource CardStyle}">
+              <StackPanel Spacing="12">
+                <TextBlock Text="判定权重与难度系数" Style="{StaticResource SectionTitleStyle}" />
+                <TextBlock Text="权重是固定游戏规则，只能读取；可修改的是难度系数（costs）与三个预算、精度缩放。" Style="{StaticResource HintStyle}" />
+                <StackPanel Orientation="Horizontal" Spacing="8">
+                  <Button x:ConnectionId='18' Content="读取模型" Style="{StaticResource AccentButtonStyle}"                     />
+                  <Button x:ConnectionId='19' Content="应用配置"                      />
+                  <CheckBox x:ConnectionId='20' x:Name="TryOnlySwitch" Content="仅试算（save=false）" MinWidth="0" VerticalAlignment="Center" />
+                  <ProgressRing x:ConnectionId='21' x:Name="ModelRing" Width="20" Height="20" IsActive="False" />
+                </StackPanel>
+                <Grid ColumnSpacing="12" RowSpacing="8">
+                  <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                  </Grid.ColumnDefinitions>
+                  <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                  </Grid.RowDefinitions>
+                  <NumberBox x:ConnectionId='7' Grid.Column="0" Grid.Row="0" x:Name="CostTooEarly" Header="costs.tooEarly" />
+                  <NumberBox x:ConnectionId='8' Grid.Column="1" Grid.Row="0" x:Name="CostEarly" Header="costs.early" />
+                  <NumberBox x:ConnectionId='9' Grid.Column="2" Grid.Row="0" x:Name="CostLate" Header="costs.late" />
+                  <NumberBox x:ConnectionId='10' Grid.Column="3" Grid.Row="0" x:Name="CostEPerfect" Header="costs.ePerfect" />
+                  <NumberBox x:ConnectionId='11' Grid.Column="0" Grid.Row="1" x:Name="CostLPerfect" Header="costs.lPerfect" />
+                  <NumberBox x:ConnectionId='12' Grid.Column="1" Grid.Row="1" x:Name="CostPlusPerfect" Header="costs.+perfect" />
+                  <NumberBox x:ConnectionId='13' Grid.Column="2" Grid.Row="1" x:Name="CostMinusPerfect" Header="costs.-perfect" />
+                  <TextBox x:ConnectionId='14' Grid.Column="3" Grid.Row="1" x:Name="CostScaleBox" Header="costScale" PlaceholderText="精度缩放" />
+                  <TextBox x:ConnectionId='15' Grid.Column="0" Grid.Row="2" x:Name="MaxSecondsBox" Header="maxSeconds" PlaceholderText="秒，上限 86400" />
+                  <TextBox x:ConnectionId='16' Grid.Column="1" Grid.Row="2" x:Name="MaxNodesBox" Header="maxNodes" PlaceholderText="节点预算" />
+                  <TextBox x:ConnectionId='17' Grid.Column="2" Grid.Row="2" x:Name="MaxDpCellsBox" Header="maxDpCells" PlaceholderText="单元预算" />
+                </Grid>
+              </StackPanel>
+            </Border>
+            <Border Style="{StaticResource CardStyle}">
+              <StackPanel Spacing="10">
+                <TextBlock Text="模型数据" Style="{StaticResource SectionTitleStyle}" />
+                <ScrollViewer Height="320" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Disabled">
+                  <ItemsControl x:ConnectionId='2' x:Name="ModelRows">
+                    <ItemsControl.ItemTemplate>
+                      <DataTemplate                                >
+                        <Grid x:ConnectionId='4' ColumnSpacing="8" Padding="0,2">
+                          <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="260" />
+                            <ColumnDefinition Width="*" />
+                          </Grid.ColumnDefinitions>
+                          <TextBlock x:ConnectionId='5' Grid.Column="0"                     Style="{StaticResource CellStyle}" Foreground="{ThemeResource TextFillColorSecondaryBrush}" />
+                          <TextBlock x:ConnectionId='6' Grid.Column="1"                       FontFamily="Consolas" FontSize="12" TextWrapping="Wrap" IsTextSelectionEnabled="True" />
+                        </Grid>
+                      </DataTemplate>
+                    </ItemsControl.ItemTemplate>
+                  </ItemsControl>
+                </ScrollViewer>
+              </StackPanel>
+            </Border>
+          </StackPanel>
+        </ScrollViewer>
+      </PivotItem>
+    </Pivot>
+  </Grid>
+</Page>
+

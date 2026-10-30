@@ -1,0 +1,400 @@
+{
+  "difficulties": [
+    {
+      "name": "Unranked",
+      "baseScore": 0
+    },
+    {
+      "name": "P1",
+      "baseScore": 0.1
+    },
+    {
+      "name": "P2",
+      "baseScore": 0.15
+    },
+    {
+      "name": "P3",
+      "baseScore": 0.2
+    },
+    {
+      "name": "P4",
+      "baseScore": 0.3
+    },
+    {
+      "name": "P5",
+      "baseScore": 0.4
+    },
+    {
+      "name": "P6",
+      "baseScore": 0.6
+    },
+    {
+      "name": "P7",
+      "baseScore": 0.8
+    },
+    {
+      "name": "P8",
+      "baseScore": 1
+    },
+    {
+      "name": "P9",
+      "baseScore": 1.5
+    },
+    {
+      "name": "P10",
+      "baseScore": 2
+    },
+    {
+      "name": "P11",
+      "baseScore": 3
+    },
+    {
+      "name": "P12",
+      "baseScore": 5
+    },
+    {
+      "name": "P13",
+      "baseScore": 7
+    },
+    {
+      "name": "P14",
+      "baseScore": 10
+    },
+    {
+      "name": "P15",
+      "baseScore": 15
+    },
+    {
+      "name": "P16",
+      "baseScore": 20
+    },
+    {
+      "name": "P17",
+      "baseScore": 30
+    },
+    {
+      "name": "P18",
+      "baseScore": 45
+    },
+    {
+      "name": "P19",
+      "baseScore": 60
+    },
+    {
+      "name": "P20",
+      "baseScore": 75
+    },
+    {
+      "name": "G1",
+      "baseScore": 100
+    },
+    {
+      "name": "G2",
+      "baseScore": 110
+    },
+    {
+      "name": "G3",
+      "baseScore": 120
+    },
+    {
+      "name": "G4",
+      "baseScore": 130
+    },
+    {
+      "name": "G5",
+      "baseScore": 140
+    },
+    {
+      "name": "G6",
+      "baseScore": 150
+    },
+    {
+      "name": "G7",
+      "baseScore": 160
+    },
+    {
+      "name": "G8",
+      "baseScore": 170
+    },
+    {
+      "name": "G9",
+      "baseScore": 180
+    },
+    {
+      "name": "G10",
+      "baseScore": 190
+    },
+    {
+      "name": "G11",
+      "baseScore": 200
+    },
+    {
+      "name": "G12",
+      "baseScore": 210
+    },
+    {
+      "name": "G13",
+      "baseScore": 220
+    },
+    {
+      "name": "G14",
+      "baseScore": 230
+    },
+    {
+      "name": "G15",
+      "baseScore": 240
+    },
+    {
+      "name": "G16",
+      "baseScore": 250
+    },
+    {
+      "name": "G17",
+      "baseScore": 275
+    },
+    {
+      "name": "G18",
+      "baseScore": 300
+    },
+    {
+      "name": "G19",
+      "baseScore": 350
+    },
+    {
+      "name": "G20",
+      "baseScore": 425
+    },
+    {
+      "name": "U1",
+      "baseScore": 500
+    },
+    {
+      "name": "U2",
+      "baseScore": 600
+    },
+    {
+      "name": "U3",
+      "baseScore": 700
+    },
+    {
+      "name": "U4",
+      "baseScore": 850
+    },
+    {
+      "name": "U5",
+      "baseScore": 1000
+    },
+    {
+      "name": "U6",
+      "baseScore": 1250
+    },
+    {
+      "name": "U7",
+      "baseScore": 1500
+    },
+    {
+      "name": "U8",
+      "baseScore": 1750
+    },
+    {
+      "name": "U9",
+      "baseScore": 2000
+    },
+    {
+      "name": "U10",
+      "baseScore": 2500
+    },
+    {
+      "name": "U11",
+      "baseScore": 3000
+    },
+    {
+      "name": "U12",
+      "baseScore": 4000
+    },
+    {
+      "name": "U13",
+      "baseScore": 0
+    },
+    {
+      "name": "U14",
+      "baseScore": 0
+    },
+    {
+      "name": "U15",
+      "baseScore": 0
+    },
+    {
+      "name": "U16",
+      "baseScore": 0
+    },
+    {
+      "name": "U17",
+      "baseScore": 0
+    },
+    {
+      "name": "U18",
+      "baseScore": 0
+    },
+    {
+      "name": "U19",
+      "baseScore": 0
+    },
+    {
+      "name": "U20",
+      "baseScore": 0
+    },
+    {
+      "name": "GQ0 (G1~G4)",
+      "baseScore": 0
+    },
+    {
+      "name": "GQ1 (G5~G8)",
+      "baseScore": 0
+    },
+    {
+      "name": "GQ2 (G9~G12)",
+      "baseScore": 0
+    },
+    {
+      "name": "GQ3 (G13~G16)",
+      "baseScore": 0
+    },
+    {
+      "name": "GQ4 (G17~G20)",
+      "baseScore": 0
+    },
+    {
+      "name": "Censored",
+      "baseScore": 0
+    },
+    {
+      "name": "Marathon",
+      "baseScore": 0
+    },
+    {
+      "name": "Gimmick",
+      "baseScore": 0
+    },
+    {
+      "name": "UQ2 (U9~U12)",
+      "baseScore": 0
+    },
+    {
+      "name": "Q2+",
+      "baseScore": 0
+    },
+    {
+      "name": "UQ3 (U13~U16)",
+      "baseScore": 0
+    },
+    {
+      "name": "Q3+",
+      "baseScore": 0
+    },
+    {
+      "name": "UQ4 (U17~U20)",
+      "baseScore": 0
+    },
+    {
+      "name": "UQ0 (U1~U4)",
+      "baseScore": 0
+    },
+    {
+      "name": "UQ1 (U5~U8)",
+      "baseScore": 0
+    },
+    {
+      "name": "Qq",
+      "baseScore": 0
+    },
+    {
+      "name": "Impossible",
+      "baseScore": 0
+    },
+    {
+      "name": "U7J",
+      "baseScore": 0
+    },
+    {
+      "name": "P0",
+      "baseScore": 0.00031
+    },
+    {
+      "name": "U6J",
+      "baseScore": 0
+    },
+    {
+      "name": "U5J",
+      "baseScore": 0
+    },
+    {
+      "name": "U15J",
+      "baseScore": 0
+    },
+    {
+      "name": "U13J",
+      "baseScore": 0
+    },
+    {
+      "name": "U11J",
+      "baseScore": 0
+    },
+    {
+      "name": "U1J",
+      "baseScore": 0
+    },
+    {
+      "name": "U8J",
+      "baseScore": 0
+    },
+    {
+      "name": "U14J",
+      "baseScore": 0
+    },
+    {
+      "name": "U12J",
+      "baseScore": 0
+    },
+    {
+      "name": "U15M",
+      "baseScore": 0
+    },
+    {
+      "name": "U9J",
+      "baseScore": 0
+    }
+  ],
+  "xacc": {
+    "schemaVersion": 2,
+    "scoreScale": 1000,
+    "costScale": 1000,
+    "maxDpCells": 8000000,
+    "maxNodes": 20000000,
+    "maxSeconds": 5.0,
+    "weights": {
+      "perfect": 1000,
+      "failMiss": 0,
+      "tooEarly": 200,
+      "early": 400,
+      "late": 400,
+      "ePerfect": 750,
+      "lPerfect": 750,
+      "+perfect": 1000,
+      "xperfect": 1000,
+      "-perfect": 1000
+    },
+    "costs": {
+      "perfect": 0,
+      "failMiss": 1000,
+      "tooEarly": 1500,
+      "early": 50000,
+      "late": 50000,
+      "ePerfect": 50000,
+      "lPerfect": 50000,
+      "+perfect": 10000,
+      "xperfect": 0,
+      "-perfect": 10000
+    }
+  }
+}
